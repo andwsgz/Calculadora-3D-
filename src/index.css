@@ -1,0 +1,351 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════════════════════════════════════════════
+   LIGHT THEME (default — base verde sage + oro dorado)
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  --ink:        #0a2b1d;
+  --ink-soft:   #2a4a3a;
+  --paper:      #eef8f1;
+  --paper-2:    #d2eadb;
+  --paper-3:    #bddec9;
+  --card:       #ffffff;
+  --rule:       #8db8a6;
+  --accent:     #0a8556;
+  --accent-dim: #087a4f;
+  --warn:       #c64a2b;
+  --muted:      #3d5547;
+  /* Oro dorado — legible sobre papel en modo claro */
+  --gold:       #b8860b;
+  --gold-bg:    rgba(184, 134, 11, 0.10);
+  --gold-border:rgba(184, 134, 11, 0.30);
+  /* Output panel — siempre oscuro independiente del tema */
+  --output-bg:      #0a2b1d;
+  --output-fg:      #eef8f1;
+  --output-soft:    rgba(238,248,241,0.72);
+  --output-muted:   rgba(238,248,241,0.50);
+  --output-border:  rgba(238,248,241,0.14);
+  --output-surface: rgba(238,248,241,0.07);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DARK THEME (verde oscuro base — activa con [data-theme="dark"])
+   ════════════════════════════════════════════════════════════════ */
+[data-theme="dark"] {
+  --ink:        #c8ead8;
+  --ink-soft:   #8bbda0;
+  --paper:      #0e1f17;
+  --paper-2:    #142a1e;
+  --paper-3:    #1c3828;
+  --card:       #162b21;
+  --rule:       #2a4a38;
+  --muted:      #5c8572;
+  --accent:     #18d483;
+  --accent-dim: #13b86e;
+  --warn:       #e05535;
+  /* Oro vibrante — amarillo dinero sobre fondo oscuro */
+  --gold:       #f5c518;
+  --gold-bg:    rgba(245, 197, 24, 0.12);
+  --gold-border:rgba(245, 197, 24, 0.35);
+  /* Output panel — permanece oscuro en modo dark */
+  --output-bg:      #091510;
+  --output-fg:      #c8ead8;
+  --output-soft:    rgba(200,234,216,0.72);
+  --output-muted:   rgba(200,234,216,0.50);
+  --output-border:  rgba(200,234,216,0.14);
+  --output-surface: rgba(200,234,216,0.07);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BASE
+   ════════════════════════════════════════════════════════════════ */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cousine', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button { opacity: 0; pointer-events: none; }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236b8378'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.6rem center;
+    background-size: 1rem;
+    padding-right: 2.2rem !important;
+  }
+  select option { background: var(--card); color: var(--ink); }
+
+  input[type='color']::-webkit-color-swatch-wrapper { padding: 2px; }
+  input[type='color']::-webkit-color-swatch { border: none; border-radius: 4px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   UTILITIES
+   ════════════════════════════════════════════════════════════════ */
+@layer utilities {
+  /* Dot-grid decorative background */
+  .dot-grid {
+    background-image: radial-gradient(rgba(10,43,29,0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  [data-theme="dark"] .dot-grid {
+    background-image: radial-gradient(rgba(200,234,216,0.05) 1px, transparent 1px);
+  }
+
+  /* ── Kit field inputs ─────────────────────────────────────── */
+  .kit-field-wrap {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    border-radius: 7px;
+    overflow: hidden;
+    transition: border-color 0.12s;
+  }
+  .kit-field-wrap:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+    border-color: var(--accent);
+  }
+  .kit-field-wrap input,
+  .kit-field-wrap select {
+    flex: 1;
+    border: 0 !important;
+    background: transparent !important;
+    padding: 11px 13px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none !important;
+    min-width: 0;
+    appearance: none;
+    box-shadow: none !important;
+    line-height: 1.4;
+  }
+  .kit-field-wrap .unit {
+    padding: 11px 13px;
+    border-left: 1px solid var(--ink);
+    background: var(--paper-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    display: grid;
+    place-items: center;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .kit-field-wrap .prefix {
+    padding: 11px 10px 11px 13px;
+    border-right: 1px solid var(--ink);
+    background: var(--paper-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: grid;
+    place-items: center;
+    transition: background 0.2s;
+  }
+
+  /* ── Field label ─────────────────────────────────────────── */
+  .kit-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    display: block;
+    font-weight: 700;
+  }
+
+  /* ── Segmented control ───────────────────────────────────── */
+  .kit-seg {
+    display: flex;
+    border: 1px solid var(--ink);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .kit-seg button {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    padding: 10px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    border-right: 1px solid var(--ink);
+    color: var(--ink);
+    transition: background 0.12s, color 0.12s;
+  }
+  .kit-seg button:last-child { border-right: 0; }
+  .kit-seg button.on,
+  .kit-seg button[data-active="true"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* ── Slider ──────────────────────────────────────────────── */
+  .kit-slider { display: flex; align-items: center; gap: 12px; }
+  .kit-slider input[type=range] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px;
+    background: var(--ink);
+    outline: none;
+    border-radius: 0;
+  }
+  .kit-slider input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1.5px solid var(--ink);
+    cursor: pointer;
+  }
+  .kit-slider input[type=range]::-moz-range-thumb {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1.5px solid var(--ink);
+    cursor: pointer;
+  }
+  .kit-slider .ro {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink);
+    min-width: 44px;
+    text-align: right;
+    font-weight: 700;
+  }
+
+  /* ── Preset chips ────────────────────────────────────────── */
+  .kit-preset {
+    border: 1px solid var(--rule);
+    background: transparent;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+  }
+  .kit-preset:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .kit-preset.on { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+
+  /* ── Input-group sections ────────────────────────────────── */
+  .kit-input-group {
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 24px;
+  }
+  .kit-input-group:last-child { border-bottom: 0; }
+  .kit-ghead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .kit-ghead .gname {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .kit-ghead .ghint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Kit buttons ─────────────────────────────────────────── */
+  .kit-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 11px 18px;
+    border: 1px solid var(--ink);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+    background: transparent;
+    color: var(--ink);
+  }
+  .kit-btn:hover  { background: var(--ink); color: var(--paper); }
+  .kit-btn.primary { background: var(--ink); color: var(--paper); }
+  .kit-btn.primary:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
+  .kit-btn.accent  { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+  .kit-btn.accent:hover { background: var(--accent-dim); border-color: var(--accent-dim); }
+  .kit-btn.on-dark { border-color: var(--output-border); color: var(--output-soft); background: transparent; border-radius: 8px; }
+  .kit-btn.on-dark:hover { background: var(--output-surface); }
+  .kit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── Breakdown bar ───────────────────────────────────────── */
+  .breakdown-bar {
+    display: inline-block;
+    height: 2px;
+    background: var(--accent);
+    flex-shrink: 0;
+    transition: width 0.35s ease;
+  }
+
+  /* ── Gold / money accent ─────────────────────────────────── */
+  .text-gold   { color: var(--gold); }
+  .bg-gold-dim { background: var(--gold-bg); }
+  .border-gold { border-color: var(--gold-border); }
+
+  /* Dark mode toggle switch */
+  .mode-toggle {
+    position: relative;
+    width: 48px; height: 26px;
+    border: 1.5px solid var(--ink);
+    border-radius: 99px;
+    background: var(--paper-2);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .mode-toggle.on { background: var(--ink); }
+  .mode-toggle::after {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px;
+    width: 14px; height: 14px;
+    background: var(--muted);
+    border-radius: 50%;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .mode-toggle.on::after {
+    transform: translateX(22px);
+    background: var(--paper);
+  }
+}

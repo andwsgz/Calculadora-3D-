@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(curl -sL \"https://api.anthropic.com/v1/design/h/OmmPIB2QX6Db8NyFkR5D-w?open_file=Calculator+Construction+Kit.html\" -o /tmp/design_file.html)",
+      "Bash(echo \"EXIT:$?\")",
+      "Read(//tmp/**)",
+      "Bash(curl -sI \"https://api.anthropic.com/v1/design/h/OmmPIB2QX6Db8NyFkR5D-w\")",
+      "Bash(curl -s -X GET \"https://api.anthropic.com/v1/design/h/OmmPIB2QX6Db8NyFkR5D-w?open_file=Calculator+Construction+Kit.html\" -H \"Accept: text/html,application/json\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Usuario\\.claude\\projects\\c--Users-Usuario-Desktop-Proyectos-calculadora-3D\\memory"
+    ]
+  }
+}
