@@ -20,13 +20,13 @@ return (
     <div className="min-h-screen" style={{ background: 'var(--paper)' }}>
       <Header />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <main className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
 
         {/* ── CALCULATOR ─────────────────────────────────────────── */}
         {activeTab === 'calculator' && (
           <div className="animate-fade-in">
             {/* Page eyebrow */}
-            <div className="mb-6">
+            <div className="mb-4 sm:mb-6">
               <span className="kit-label" style={{ marginBottom: 6 }}>
                 <span
                   style={{
@@ -54,8 +54,9 @@ return (
               </h1>
             </div>
 
-            {/* calc-shell: white card, grid 1fr 480px */}
+            {/* calc-shell: white card, grid 1fr 440px */}
             <div
+              className="calc-shell"
               style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 440px',
@@ -67,22 +68,38 @@ return (
               }}
             >
               {/* Left: inputs panel */}
-              <div style={{ borderRight: '1px solid var(--rule)', overflowY: 'auto', maxHeight: '85vh' }}>
+              <div className="calc-inputs" style={{ borderRight: '1px solid var(--rule)', overflowY: 'auto', maxHeight: '85vh' }}>
                 <PrintSection />
                 <LaborSection />
               </div>
 
               {/* Right: dark output panel */}
-              <div style={{ position: 'sticky', top: 0, maxHeight: '85vh', overflowY: 'auto', background: 'var(--output-bg)' }}>
+              <div className="calc-results" style={{ position: 'sticky', top: 0, maxHeight: '85vh', overflowY: 'auto', background: 'var(--output-bg)' }}>
                 <ResultsPanel />
               </div>
             </div>
 
-            {/* Mobile: stacked layout */}
             <style>{`
-              @media (max-width: 860px) {
-                .calc-shell-grid {
+              @media (max-width: 768px) {
+                .calc-shell {
                   grid-template-columns: 1fr !important;
+                  border-radius: 12px !important;
+                }
+                .calc-results {
+                  position: static !important;
+                  max-height: none !important;
+                  order: -1;
+                }
+                .calc-inputs {
+                  border-right: none !important;
+                  border-top: 1px solid var(--rule);
+                  max-height: none !important;
+                }
+                .results-panel-inner {
+                  padding: 24px 20px 24px !important;
+                }
+                .results-price {
+                  font-size: clamp(44px, 12vw, 72px) !important;
                 }
               }
             `}</style>

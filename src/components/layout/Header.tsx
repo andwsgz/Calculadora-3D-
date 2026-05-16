@@ -17,11 +17,11 @@ export function Header() {
       style={{
         background: 'var(--card)',
         borderBottom: '1px solid var(--rule)',
-        padding: '0 36px',
         position: 'sticky', top: 0, zIndex: 50,
       }}
+      className="px-4 sm:px-9"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-6 h-14">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 sm:gap-6 h-14">
 
         {/* Brand */}
         <div className="flex items-center gap-2.5 flex-shrink-0">
@@ -58,7 +58,7 @@ export function Header() {
                   fontSize: 11,
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  padding: '7px 14px',
+                  padding: '7px 8px',
                   border: isActive ? '1px solid var(--ink)' : '1px solid transparent',
                   borderRadius: 7,
                   background: isActive ? 'var(--ink)' : 'transparent',

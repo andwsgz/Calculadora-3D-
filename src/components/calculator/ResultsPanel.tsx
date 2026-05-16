@@ -90,7 +90,7 @@ export function ResultsPanel() {
 
   return (
     <div
-      className="flex flex-col"
+      className="flex flex-col results-panel-inner"
       style={{ background: 'var(--output-bg)', color: 'var(--output-fg)', padding: '36px 32px 36px' }}
     >
       {/* Top label */}
@@ -112,7 +112,7 @@ export function ResultsPanel() {
           style={{
             fontFamily: 'Fraunces, Georgia, serif',
             fontWeight: 500,
-            fontSize: 'clamp(56px, 6vw, 88px)',
+            fontSize: 'clamp(44px, 10vw, 88px)',
             lineHeight: 0.95,
             letterSpacing: '-0.025em',
             wordBreak: 'break-all',
